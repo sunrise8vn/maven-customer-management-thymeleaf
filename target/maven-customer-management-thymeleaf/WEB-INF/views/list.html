@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <div class="notify">
+        <div th:if="${success}">
+            <script th:inline="javascript">
+                App.showSuccessAlert([[${success}]]);
+            </script>
+<!--            <span th:text="${success}"></span>-->
+        </div>
+    </div>
+    <h3>Customers</h3>
+    <p>
+        <a th:href="@{/customer/create}">
+            Add new customer
+        </a>
+    </p>
+
+    <table id="customers" class="table table-hover" border="1">
+        <thead>
+        <tr>
+            <th class="text-center">#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
+            <th class="text-center">View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${customers}">
+            <td th:text="${row.getId()}" class="text-center"></td>
+            <td th:text="${row.getName()}"></td>
+            <td th:text="${row.getEmail()}"></td>
+            <td th:text="${row.getAddress()}"></td>
+            <td class="text-center">
+                <a class="edit" th:href="@{/customer/edit/__${row.getId()}__}">
+                    <i class="fa fa-pencil-square-o fa-fw"></i>
+                    edit
+                </a>
+            </td>
+            <td class="text-center">
+                <a class="delete" th:href="@{/customer/delete/__${row.getId()}__}">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    delete
+                </a>
+            </td>
+            <td class="text-center">
+                <a class="view" th:href="@{/customer/view/__${row.getId()}__}">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    view
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <footer th:replace="/layout :: footer"></footer>
+</div>
+
+</body>
+</html>

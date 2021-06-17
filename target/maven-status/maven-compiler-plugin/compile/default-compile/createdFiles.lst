@@ -1,0 +1,6 @@
+com\cg\model\Customer.class
+com\cg\service\CustomerService.class
+com\cg\configuration\AppInit.class
+com\cg\controller\CustomerController.class
+com\cg\service\ICustomerService.class
+com\cg\configuration\AppConfig.class

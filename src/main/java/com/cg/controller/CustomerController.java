@@ -1,6 +1,7 @@
 package com.cg.controller;
 
 import com.cg.model.Customer;
+import com.cg.model.upload.UploadOneFile;
 import com.cg.service.CustomerService;
 import com.cg.service.ICustomerService;
 import org.springframework.stereotype.Controller;
@@ -15,40 +16,40 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-@RequestMapping("/customer")
+@RequestMapping({"", "/customer"})
 public class CustomerController {
     private final ICustomerService customerService = new CustomerService();
 
-    @GetMapping("")
-    public String index(Model model) {
-
-        List<Customer> customerList = customerService.findAll();
-        model.addAttribute("customers", customerList);
-        return "/index";
+    @GetMapping()
+    public String showList(Model model) {
+        List<Customer> customers = customerService.findAll();
+        model.addAttribute("customers", customers);
+        return "/customer/list";
     }
 
-    @GetMapping("/{id}/view")
+    @GetMapping("/view/{id}")
     public String view(@PathVariable int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
-        return "/view";
+        return "/customer/view";
     }
 
     @GetMapping("/create")
-    public String create(Model model) {
-        model.addAttribute("customer", new Customer());
-        return "/create";
+    public ModelAndView create() {
+        ModelAndView modelAndView = new ModelAndView("/customer/create");
+        modelAndView.addObject("customer", new Customer());
+        return modelAndView;
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
-        return "/edit";
+        return "/customer/edit";
     }
 
-    @GetMapping("/{id}/delete")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
-        return "/delete";
+        return "/customer/delete";
     }
 
     @PostMapping("/save")
