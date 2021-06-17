@@ -68,8 +68,8 @@ public class AppConfig implements WebMvcConfigurer,  ApplicationContextAware {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 //        registry.addResourceHandler("/avatar/**").addResourceLocations("/avatar/");
 //        registry.addResourceHandler("/upload/**").addResourceLocations("file:" + fileUpload);
-        registry.addResourceHandler("/upload/**").addResourceLocations("/upload/");
-        registry.addResourceHandler("/images/**").addResourceLocations("file:" + fileUpload);
+//        registry.addResourceHandler("/upload/**").addResourceLocations("/upload/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:" + fileUpload);
     }
 
     @Bean(name = "multipartResolver")

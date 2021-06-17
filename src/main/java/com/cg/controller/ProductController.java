@@ -60,7 +60,7 @@ public class ProductController {
     @PostMapping("/add")
     public ModelAndView addProduct(@ModelAttribute Product product, HttpServletRequest request, @ModelAttribute("uploadOneFile") UploadOneFile uploadOneFile) {
         String uploadRootPath = request.getServletContext().getRealPath("/upload");
-        if (fileUpload == null || fileUpload.equals("")) {
+        if (fileUpload.isEmpty() || fileUpload == null || fileUpload.equals("")) {
             fileUpload = uploadRootPath;
         }
 
